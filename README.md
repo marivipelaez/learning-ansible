@@ -28,3 +28,19 @@ db1   RUNNING  10.0.3.30  -     NO
 web1  STOPPED  -          -     NO
 web2  STOPPED  -          -     NO
 ```
+
+### Install python 2.7 in lxc containers
+
+```
+# lxc-attach -n db1
+# apt-get install python-minimal --no-install-recommends
+```
+
+## Ansible configuration
+
+* Ansible_Config (environment variable)
+* ansible.cfg (current directory)
+* .ansible.cfg (user's home)
+* /etc/ansible/ansible.cfg
+
+
