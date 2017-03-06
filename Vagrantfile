@@ -69,14 +69,5 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
 
-  $script = <<-SCRIPT
-  apt-add-repository ppa:ansible/ansible
-  apt-get update
-  apt-get install -y software-properties-common
-  apt-get install -y ansible
-  apt-get install -y lxc
-  apt-get autoremove
-  SCRIPT
-
-  config.vm.provision "shell", inline: $script
+  config.vm.provision "shell", path: "bootstrap.sh"
 end
