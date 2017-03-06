@@ -43,4 +43,11 @@ web2  STOPPED  -          -     NO
 * .ansible.cfg (user's home)
 * /etc/ansible/ansible.cfg
 
+## Ansible hosts
 
+* Default file in `/etc/ansible/hosts`
+* Include a new inventory file per project (INI syntax) to be used as:
+
+```shell
+# ansible-playbook -i inventory ....
+```
