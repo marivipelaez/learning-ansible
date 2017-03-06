@@ -51,3 +51,49 @@ web2  STOPPED  -          -     NO
 ```shell
 # ansible-playbook -i inventory ....
 ```
+
+### Add keys
+
+Following https://help.ubuntu.com/community/SSH/OpenSSH/Keys
+
+
+```shell
+$ ssh-keygen -t rsa
+$ cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+$ ssh-add
+  Identity added: /home/vagrant/.ssh/id_rsa (/home/vagrant/.ssh/id_rsa)
+$ ssh-add -L
+```
+
+Add your brand-new ssh key to your hosts:
+
+```shell
+$ ssh-copy-id ubuntu@10.0.3.30
+```
+
+Check that everything works like a charm:
+
+```shell
+$ ansible 10.0.3.19 -m ping -u root -i inventory
+10.0.3.19 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+
+### Use ansible to install new packages and check them
+```shell
+$ ansible web -a "apt-get update" -i inventory -u root
+$ ansible web -a "apt-get -y install nginx" -i inventory -u root
+$ ansible web -m service -a "name=nginx state=restarted" -i inventory -u root
+```
+
+Add this section to your `ansible.cfg` to be able to become root:
+
+```yml
+[privilege_escalation]
+become=Yes
+become_method=sudo
+become_user=root
+become_ask_pass=True
+```
