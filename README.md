@@ -97,3 +97,28 @@ become_method=sudo
 become_user=root
 become_ask_pass=True
 ```
+
+## Using playbooks
+
+### Playbook to prepare a host for ansible :)
+
+Different ways of copying ssh key to each machine:
+
+* Using ansible module autorized_key
+
+```yml
+    - name: Fancy way of doing authoried keys
+      authorized_key: user=root
+                      exclusive=no
+                      key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+```
+
+* Creating /root/.ssh and copying our pubkey:
+
+```yml
+    - name: Create /root/.ssh
+      file: path=/root/.ssh/ state=directory mode=0700
+
+    - name: Copy pubkey to authorized_keys
+      lineinfile: dest=/root/.ssh/authorized_keys line="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+```
