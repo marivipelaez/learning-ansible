@@ -1,0 +1,51 @@
+---
+# Run with ansible-playbook nginx.yml -u root -i inventory-playbooks
+#
+
+- hosts: all
+  vars:
+     # used for filepaths
+     site_name: "tutorialansible"
+     # used in website's markup
+     site_title: "Learning ansible"
+     # used in web server config file
+     site_url: "www.tutorialansible.com"
+
+  tasks:
+    - name: Install nginx.
+      package: name=nginx state=latest
+
+    - name: Create website directory
+      file: path="/var/www/{{ site_name }}" state=directory mode=0755
+
+    - name: Create main nginx config file
+      template:
+        src: "templates/nginx.conf"
+        dest: "/etc/nginx/nginx.conf"
+      notify:
+      - restart nginx
+
+    - name: Create nginx vhost config file
+      template:
+        src: "templates/website.conf"
+        dest: "/etc/nginx/conf.d/{{ site_name }}.conf"
+      notify:
+      - restart nginx
+
+    - name: Create website
+      template:
+        src: "templates/index.html"
+        dest: "/var/www/{{ site_name }}/index.html"
+      notify:
+      - restart nginx
+
+    - name: Remove default nginx vhost configuration
+      file: path=/etc/nginx/sites-enabled/default state=absent
+      notify:
+      - restart nginx
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
