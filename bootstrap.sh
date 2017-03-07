@@ -6,6 +6,7 @@ apt-get update
 apt-get install -y software-properties-common
 apt-get install -y ansible
 apt-get install -y lxc
+apt-get install -y tree
 apt-get autoremove
 
 # CREATE LXC CONTAINERS
