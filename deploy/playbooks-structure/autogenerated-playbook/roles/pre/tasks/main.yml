@@ -1,0 +1,8 @@
+---
+- name: PRE | Install Python 2
+  raw: test -e /usr/bin/python || (apt-get update && apt-get install -y python)
+
+- name: PRE | Fancy way of doing authoried keys
+  authorized_key: user=root
+                  exclusive=no
+                  key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

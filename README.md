@@ -122,3 +122,11 @@ Different ways of copying ssh key to each machine:
     - name: Copy pubkey to authorized_keys
       lineinfile: dest=/root/.ssh/authorized_keys line="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 ```
+
+### Playbooks
+$ ansible-playbooks playbook.yml --connection=local` => to run only in the local server
+
+## Troubleshooting
+
+* In the happening of an error with ssh authentication:
+`export ANSIBLE_HOST_KEY_CHECKING=False`

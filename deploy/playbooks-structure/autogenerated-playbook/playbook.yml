@@ -1,0 +1,24 @@
+---
+- name: Prepare hosts
+  hosts: dbservers:webservers
+  gather_facts: False
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - pre
+
+- name: Database setup
+  hosts: dbservers
+  remote_user: root
+  roles:
+    - common
+    - database
+
+- name: Webserver setup
+  hosts: webservers
+  remote_user: root
+  roles:
+    - common
+    - web
