@@ -107,7 +107,7 @@ Different ways of copying ssh key to each machine:
 * Using ansible module autorized_key
 
 ```yml
-    - name: Fancy way of doing authoried keys
+    - name: Fancy way of doing authorized keys
       authorized_key: user=root
                       exclusive=no
                       key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
@@ -124,9 +124,19 @@ Different ways of copying ssh key to each machine:
 ```
 
 ### Playbooks
-$ ansible-playbooks playbook.yml --connection=local` => to run only in the local server
+`$ ansible-playbooks playbook.yml --connection=local` => to run only in the local server
+
+### Modules
+http://docs.ansible.com/ansible/list_of_all_modules.html
+
+* OS package system: Use `package` instead of `apt`, `yum`, `pkg` or `apt_repository`
+* files: `template, file, lineinfile, blockinfile, copy, fetch, stat`
+* System: `service, user, group, cron, hostname, authorized_key, iptables, modprobe, kernel_blacklist, gluster_volume, lvm, zfs`
+* Various: `raw, synchronize, get_url, unarchive, ec2, rds`
 
 ## Troubleshooting
 
 * In the happening of an error with ssh authentication:
 `export ANSIBLE_HOST_KEY_CHECKING=False`
+
+* To prepare a host to be managed with ansible use this line `gather_facts=False` to avoid needing python before installing it.
