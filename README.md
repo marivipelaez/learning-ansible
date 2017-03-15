@@ -146,3 +146,50 @@ http://docs.ansible.com/ansible/list_of_all_modules.html
 `export ANSIBLE_HOST_KEY_CHECKING=False`
 
 * To prepare a host to be managed with ansible use this line `gather_facts=False` to avoid needing python before installing it.
+
+* Module `debug` with msg or var to analyze errors
+
+* Module `stat` to know the status of a file/folder
+* Module `shell` to run basic linux commands (for instance, `whoami`)
+
+
+## Control status in raw commands
+
+* Changed_when:
+
+```yml
+- command: "apt-get upgrade -y"
+  register: apt_upgrade
+  changed_when: "'0 upgraded, 0 newly installed' not in apt_upgrade.stdout"
+```
+
+* failed_when:
+
+ Control when a raw command failed:
+
+```yml
+- command: "ls /some/nonexistent/directory"
+  register: mylisting
+  failed_when: "'foo' not in mylisting.stderr"
+```
+
+* ignore_errors:
+
+Used when a task is likely to produce errors in STDOUT, they can be ignored:
+
+```yml
+- command: "ls /some/nonexistent/directory"
+  register: mylisting
+  failed_when: "'foo' not in mylisting.stderr"
+  ignore_errors: yes
+```
+
+* something is/is not defined
+
+
+```yml
+- name: Check if my_var is defined
+  debug: msg="Yes, my_var is defined"
+  when: my_var is defined
+```
+
