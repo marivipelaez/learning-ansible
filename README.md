@@ -193,3 +193,54 @@ Used when a task is likely to produce errors in STDOUT, they can be ignored:
   when: my_var is defined
 ```
 
+## Templating: jinja2 features
+
+http://jinja.pocoo.org/docs/dev/templates
+
+```code
+{%  %} for statements
+{{ }} for expressions
+{# #} for comments
+# ## line statements
+```
+
+```code
+{%  %} for statements
+{{ }} for expressions
+{# #} for comments
+# ## line statements
+```
+
+### For loops
+
+```code
+{% for server in groups['webservers'] %}
+  web{{ loop.index }}.tutorialinux.org
+{% endfor %}
+```
+
+### Filters: predefined functions to be used in Jinja templates
+
+* Display all the webservers in the inventory:
+
+```code
+{{ webservers|join(', ') }}
+```
+
+### Escaping
+
+All these lines will be printed as they are, literally.
+
+```code
+{% raw %}
+  <ul>
+    {% for item in seq %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+{% endraw %}
+```
+
+
+
+
