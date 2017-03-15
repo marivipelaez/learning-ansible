@@ -241,6 +241,51 @@ All these lines will be printed as they are, literally.
 {% endraw %}
 ```
 
+## YAML: Yet Another Markup Language
+
+It's like JSON but with comments
+
+```yml
+---
+# simple vars
+name: David
+video ideas: hundreds
+free time: 0
+
+# List (books = ["Cryptonomicon", "Snow Crash" ...])
+books:
+    - Cryptonomicon
+    - Snow Crash
+    - The Design and Implementation of the FreeBSD Operating System
+
+# Dictionary ( languages = {"python": "excellent", "ruby": "good", ...})
+languages:
+    python: excellent
+    ruby: good
+    clojure: bad
+    assembly: wannabe
+
+# Multi-line string with new lines
+hobbies: |
+    4 GCSEs
+    3 A-Levels
+    BSc in the Internet of Things
+
+# One long line
+favorite_quote >
+    I just love
+    to read
+    lots of books
+
+# Quoting
+# To do string interpolation, quotes are needed if variable is in the beginning (it's seen as a dictionary...)
+# If the var is in the middle or at the end, it's fine without quotes.
+
+vars:
+  age_path: "{{ dave.age }}/html/oldman.html"
+  age_path: /www/{{ dave.age }}/html/oldman.html
+```
+
 
 
 
