@@ -13,8 +13,14 @@ apt-get autoremove
 lxc-create -n db1 -t ubuntu
 lxc-create -n web1 -t ubuntu
 lxc-create -n web2 -t ubuntu
+lxc-create -n matterdb -t ubuntu
+lxc-create -n mattermost -t ubuntu
+lxc-create -n matterweb -t ubuntu
 
 # START LXC CONTAINERS AS DAEMONS
 lxc-start -n db1 -d
 lxc-start -n web1 -d
 lxc-start -n web2 -d
+lxc-start -n matterdb -d
+lxc-start -n mattermost -d
+lxc-start -n matterweb -d

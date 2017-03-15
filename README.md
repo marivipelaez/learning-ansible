@@ -134,6 +134,12 @@ http://docs.ansible.com/ansible/list_of_all_modules.html
 * System: `service, user, group, cron, hostname, authorized_key, iptables, modprobe, kernel_blacklist, gluster_volume, lvm, zfs`
 * Various: `raw, synchronize, get_url, unarchive, ec2, rds`
 
+### Variables & Facts
+* Scopes: Global, Per-Play, Per-Host, `--extra-vars` flag overrides everything
+* Get all facts from a host:
+
+`$ ansible 10.0.3.213 -i inventory -m setup -u root`
+
 ## Troubleshooting
 
 * In the happening of an error with ssh authentication:
