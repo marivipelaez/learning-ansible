@@ -286,6 +286,21 @@ vars:
   age_path: /www/{{ dave.age }}/html/oldman.html
 ```
 
+## Blocks
+
+* New in ansible2
+
+```yml
+block:
+  - name: First item
+    command: "ls /somedir"
+    rescue:
+      - name: Only run when a task inside this block fails
+        debug: msg="Somethig went wrong"
+    always:
+      - name: Always run
+        debug: msg="Regardless of what happened above, we're onde with this block!"
+```
 
 
 
