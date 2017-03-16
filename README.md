@@ -328,3 +328,13 @@ $ cd [my-project]/deploy/galaxy
 $ ansible-playbook playbook.yml -i hosts -u ubuntu -k --ask-sudo-pass
 ```
 
+## Security
+
+* Ansible security == system security
+* No daemon => no new vulnerabilities
+* No special Snowflakes i.e. no special bash scripting only for gurus => good security.
+* Ansible tower => user control + RABAC
+* Turn off root ssh access, use keys, use sudo
+* Harden ansible controller machine
+* Don't store keys on the file system, use somthing like Hashicorp's Vault for storing secrets
+
