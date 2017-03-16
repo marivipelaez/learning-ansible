@@ -303,4 +303,28 @@ block:
 ```
 
 
+## Ansible Galaxy
+
+The ansible repository of roles:
+
+* https://galaxy.ansible.com/
+
+```shell
+$ ansible-galaxy install username.rolename
+$ ansible-galaxy install tutorialinux.nginx,v1.8.24
+$ ansible-galaxy install git+https://github.com/groovemonkey/nginx.git
+$ ansible-galaxy install -r requirements.yml # roles file
+$ ansible-galaxy list => shows the locally already installed roles in /etc/ansible/roles
+- jeqo.nginx, master => username=jeqo, rolename=nginx, version=master
+$ ansible-galaxy remove username.rolename
+```
+### Example
+
+* Using one role from galaxy:
+
+```shell
+$ sudo ansible-galaxy install jeqo.nginx => will install it in /etc/ansible/roles/jeqo.nginx
+$ cd [my-project]/deploy/galaxy
+$ ansible-playbook playbook.yml -i hosts -u ubuntu -k --ask-sudo-pass
+```
 
