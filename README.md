@@ -338,3 +338,10 @@ $ ansible-playbook playbook.yml -i hosts -u ubuntu -k --ask-sudo-pass
 * Harden ansible controller machine
 * Don't store keys on the file system, use somthing like Hashicorp's Vault for storing secrets
 
+## Ansible in the cloud
+
+* http://docs.ansible.com/ansible/list_of_cloud_modules.html
+* http://docs.ansible.com/ansible/guide_aws.html
+
+* Playbook that generates the inventory
+ * `$ ansible-playbook generates-hosts-playbook.yml`
